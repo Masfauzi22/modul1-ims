@@ -11,7 +11,7 @@ while (1):
         connection_to_bank = 1
         # open connection db toko online
         try:
-            connToko = pymysql.connect(host='sql4.freemysqlhosting.net', port=3306, user='sql4479702',
+            connToko = pymysql.connect(host='sql4.freemysqlhosting.net', user='sql4479702',
                                        password='5GYFmdYU8F', database='sql4479702')
             curToko = connToko.cursor()
         except:
@@ -19,7 +19,7 @@ while (1):
 
         # open connection db bank
         try:
-            connBank = pymysql.connect(host='sql4.freemysqlhosting.net', port=3306, user='sql4479667',
+            connBank = pymysql.connect(host='sql4.freemysqlhosting.net', user='sql4479667',
                                        password='6zJUzMLw8D', database='sql4479667')
             curBank = connBank.cursor()
         except:
@@ -45,7 +45,7 @@ while (1):
                     if(data[0] == dataIntegrasi[0]):
                         a=1
                 if (a==0):
-                    print("-- RUN INSERTED FOR ID = %s at %s --" % (dataIntegrasi[0], now))
+                    print("-- RUN INSERTED FOR ID = %s at %s" % (data[0], now))
                     val = (data[0], data[1], data[2], data[3], data[4])
                     insert_integrasi_toko = "INSERT INTO tb_integrasi (id_transaksi, no_rekening, tgl_transaksi, total_transaksi, status)" \
                                             "VALUES(%s, %s, %s, %s, %s)"
@@ -76,12 +76,12 @@ while (1):
 
                     # delete row in tb_integrasi in db_toko
                     delete_integrasi_toko = "DELETE FROM tb_integrasi WHERE id_transaksi = '%s'" % (dataIntegrasi[0])
-                    curToko.execute(delete_integrasi_toko)
+                    curToko.execute(delete_integrasi_toko, val)
                     connToko.commit()
 
                     if(connection_to_bank==1):
                         delete_integrasi_bank = "DELETE FROM tb_integrasi WHERE id_transaksi = '%s'" % (dataIntegrasi[0])
-                        curBank.execute(delete_integrasi_bank)
+                        curBank.execute(delete_integrasi_bank, val)
                         connBank.commit()
 
 
