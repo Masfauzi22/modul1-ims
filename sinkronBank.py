@@ -81,8 +81,14 @@ while (1):
                     connBank.commit()
 
                     if(connection_to_toko==1):
+                        # delete row in tb_integrasi in db_toko
                         delete_integrasi_toko = "DELETE FROM tb_integrasi WHERE id_transaksi = '%s'" % (dataIntegrasi[0])
                         curToko.execute(delete_integrasi_toko)
+                        connToko.commit()
+                        
+                         # delete row in tb_transaksi in db_toko
+                        delete_transaksi_toko = "DELETE FROM tb_transaksi WHERE id_transaksi = '%s'" % (dataIntegrasi[0])
+                        curToko.execute(delete_transaksi_toko)
                         connToko.commit()
 
 
