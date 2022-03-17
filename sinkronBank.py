@@ -10,7 +10,7 @@ while (1):
         connection_to_toko = 1
         # open connection db toko online
         try:
-            connToko = pymysql.connect(host='sql4.freemysqlhosting.net', port=3306, user='sql4479702',
+            connToko = pymysql.connect(host='sql4.freemysqlhosting.net', user='sql4479702',
                                        password='5GYFmdYU8F', database='sql4479702')
             curToko = connToko.cursor()
         except:
@@ -18,7 +18,7 @@ while (1):
 
         # open connection db bank
         try:
-            connBank = pymysql.connect(host='sql4.freemysqlhosting.net', port=3306, user='sql4479667',
+            connBank = pymysql.connect(host='sql4.freemysqlhosting.net', user='sql4479667',
                                        password='6zJUzMLw8D', database='sql4479667')
             curBank = connBank.cursor()
         except:
